@@ -1,0 +1,14 @@
+#!/bin/bash
+# Copyright David Shin June 18, 2016
+#
+# Use to commit files in git
+# Can attach an optional 9 word message
+# 
+################################################
+
+if [ -z "$1" ] # Checks to see if there is a $1 argument from stdin
+then 
+    git commit
+else
+    git commit -m "$1 $2 $3 $4 $5 $6 $7 $8 $9"
+fi 

@@ -1,0 +1,14 @@
+#!/bin/bash
+# Copyright David Shin June 18, 2016
+#
+# Runs git checkout
+# Can either specify a branch or leave blank
+# 
+################################################
+
+if [ -z "$1" ] # Checks to see if there is a $1 argument from stdin
+then 
+    git checkout
+else
+    git checkout $1
+fi 

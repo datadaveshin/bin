@@ -1,0 +1,41 @@
+#!/bin/bash
+# Copyright David Shin June 18, 2016
+#
+# Use to double push from gh-pages locally
+# to gh-pages and master on github
+# 
+################################################
+
+echo `git branch` >> tmp.5150
+S1=`awk '{print $1}' tmp.5150`
+S2=`awk '{print $(NF-1)}' tmp.5150`
+S3=`awk '{print $NF}' tmp.5150`
+
+echo $S1
+rm -f tmp.5150
+
+if [ $S1 = "gh-pages" ] && [ $S3 = "master" ]
+then
+    echo "We are on the master branch"
+    git status
+    git push
+    git checkout gh-pages
+    echo "We are now on gh-pages"
+    git merge master
+    git push
+    git checkout master
+    echo "We are now back to the master branch"
+elif [ $S2 = "gh-pages" ]
+then 
+    echo "We are on gh-pages"
+    git status
+    git push
+    git checkout master
+    echo "We are now on the master branch"
+    git merge gh-pages
+    git push
+    git checkout gh-pages
+    echo "We are back to gh-pages"
+else 
+    echo "please check your branch"
+fi
