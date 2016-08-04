@@ -1,10 +1,12 @@
 #!/bin/bash
 # Copyright David Shin June 18, 2016
-#
-# Use to add up to 9 specified files or 
-# all files (if no arguments given) 
-# to be staged in git
-# 
+#* 
+#* Script:      ga
+#* Description: Use to add up to 9 specified files or all files 
+#*              (if no arguments given) to be staged in git
+#* Usage:       ./ga my_file.py myOtherFile.js
+#*              ./ga
+#* 
 ################################################
 
 if [ -z "$1" ] # Checks to see if there is a $1 argument
