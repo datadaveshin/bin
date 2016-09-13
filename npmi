@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# Installs the testers for the Galvanize homework and warmup exercises
+#
+#
+npm install
+npm install mocha
+npm install chai
