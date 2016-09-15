@@ -6,3 +6,4 @@
 npm install
 npm install mocha
 npm install chai
+echo "node_modules" >> .gitignore
