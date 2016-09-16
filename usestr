@@ -1,5 +1,11 @@
-#!/bin/sh
-echo "\"use strict\";" > toto.tmp
-cat toto.tmp $1 >> toto2.tmp
-mv toto2.tmp $1
-rm toto.tmp 
+#!/bin/csh
+#
+# Use this to add "use strict"; to the top of a JavaScript file
+#
+#
+foreach i (*js)
+    echo "\"use strict\";" > toto.tmp
+    cat toto.tmp $i >> toto2.tmp
+    mv toto2.tmp $i
+    rm toto.tmp 
+end
