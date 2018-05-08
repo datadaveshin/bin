@@ -1,4 +1,58 @@
-#!/bin/bash
-#filename="notes-$(date +%Y-%m-%d)"
-filename=$1-$(date +%Y-%m-%d)
-touch $filename
+#!/bin/sh
+# Script used to make a note using the date as part of the filename 
+# The beginning of the note will have a timestamp inside
+# 
+# Default filename:
+# note_YYYY_mm_dd
+#
+# Flags: 
+# -n adds a name to the file string: note_name_YYYY_mm_dd
+# -e add an extension, ie. `-e md`:  note_YYYY_mm_dd.md 
+#
+#
+# TODO
+# 1. Set another flag for an open -a - default is vim
+# 2. Make a help flag
+# 3. Decide on "file exists" or just opening if exists
+##########
+
+# Options
+extension='false'
+name='false'
+while getopts 'e:n:' flag; do
+  case "${flag}" in
+     e) extension="${OPTARG}" ;;
+     n) name="${OPTARG}" ;;
+     *) exit 1 ;;
+  esac
+done
+
+#echo name extension $name $extension
+
+# Make basic file string, with name substring if provided
+if [ $name = 'false' ]; then 
+  filename=note-$(date +%Y_%m_%d)
+else 
+  filename=note-$name-$(date +%Y_%m_%d)
+fi
+
+#echo filename $filename
+
+# Add extension if given
+if [ $extension != 'false' ]; then 
+  filename=$filename.$extension
+fi
+
+# Check if file exists, generate file with contents and open
+if [ -f $filename ]; then
+  #echo "File exists"
+  vim $filename
+else
+  echo "Date:" `date`    >  $filename
+  echo "File:" $filename >> $filename
+fi
+
+# Could set a case switch on extension to open using different apps
+#open $filename
+vim $filename
+
