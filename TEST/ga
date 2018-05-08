@@ -15,5 +15,5 @@ then
     echo "added all"
 else
     git add $1 $2 $3 $4 $5 $6 $7 $8 $9
-    echo "added" $1 ", etc. from command line"
+    echo "added" $1 ", .etc from command line"
 fi 

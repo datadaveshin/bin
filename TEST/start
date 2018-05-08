@@ -1,0 +1,4 @@
+#!/bin/sh
+cd ~/Consulting/sibyls/regions-and-numbers
+atom .
+`NODE_ENV="development" nodemon -e js,py,ejs`

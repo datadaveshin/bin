@@ -1,0 +1,3 @@
+#!/bin/sh
+cd /Users/dave/dev/virtualEnvs/pip-requirement-files/
+./venvEnter ../python3/py3_sandbox

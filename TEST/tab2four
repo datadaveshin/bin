@@ -1,0 +1,6 @@
+#!/bin/sh
+# Copyright David Shin 2016
+# Converts tabs to 4 spaces
+#
+sed '1,$s/	/    /g' $1 >> toto 
+mv toto $1

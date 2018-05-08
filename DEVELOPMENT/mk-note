@@ -1,0 +1,4 @@
+#!/bin/bash
+#filename="notes-$(date +%Y-%m-%d)"
+filename=$1-$(date +%Y-%m-%d)
+touch $filename

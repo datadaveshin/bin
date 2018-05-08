@@ -1,8 +1,0 @@
-#!/bin/sh
-#
-#  changes directory to the last directory made/acted on
-#
-#
-#
-
-cd `ls -lrt | grep ^drw | awk '{print $9}'

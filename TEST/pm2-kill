@@ -1,0 +1,6 @@
+#/bin/sh
+# Script to turn off pm2 servers running node
+#############################################
+
+pm2 stop all                    # stops all servers
+pm2 kill                        # wipes out any processes

@@ -1,0 +1,2 @@
+#!/bin/sh
+open localhost:3000
