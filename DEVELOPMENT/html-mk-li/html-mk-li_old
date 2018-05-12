@@ -1,0 +1,28 @@
+#!/bin/bash
+# Description:
+# Takes a file that contains a list of items and outputs an html list.
+
+
+# Options
+listtype='ul'   #The default is ul or unordered list
+while getopts 'ou' flag; do
+  case "${flag}" in
+    o) listtype='ol' ;;
+    u) listtype='ul' ;;
+    *) exit 1 ;;
+  esac
+done
+
+if [ $listtype = 'ol' ]; then
+  echo "<ol>"
+elif [ $listtype = 'ul' ]; then
+  echo "<ul>"
+fi 
+
+sed 's/^/\  <li\>/g' $1 | sed 's/\(.\)$/\1\<li\>/'
+
+if [ $listtype = 'ol' ]; then
+  echo "<ol>"
+elif [ $listtype = 'ul' ]; then
+  echo "<ul>"
+fi
