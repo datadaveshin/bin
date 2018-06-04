@@ -1,0 +1,24 @@
+#!/bin/bash
+# Fri May 11 18:14:54 PDT 2018 
+# David Shin
+#
+# Description:
+# Takes a file that contains a column of items in file and adds <li> tags to
+# each item. The li elements are then printed to standard output.
+#
+# Example:
+# dog 
+# cat
+# horse
+#
+# would be converted to:
+# <li>dog</li>
+# <li>cat</li>
+# <li>horse</li>
+#
+# Usage: 
+# ./html-mk-li <filename>
+#########################
+
+#sed 's/^/<li>/g' "$1" | sed 's/\(.\)$/\1\<\/li\>/'
+sed 's/^/<li>/g' "$1" | sed 's/\(.\)$/\1<\/li>/'
