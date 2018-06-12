@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Script used to make a note using the date as part of the filename 
 # The beginning of the note will have a timestamp inside
 # 
