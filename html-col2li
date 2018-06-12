@@ -1,6 +1,6 @@
 #!/bin/bash
 # Fri May 11 18:14:54 PDT 2018 
-# David Shin
+# © David Shin 2018
 #
 # Description:
 # Takes a file that contains a column of items in file and adds <li> tags to
