@@ -1,0 +1,9 @@
+#/bin/sh
+# Fri May 11 18:14:54 PDT 2018 
+# © David Shin 2018
+#
+# Description: Script to turn off pm2 controlled servers
+########################################################
+
+pm2 stop all                    # stops all servers
+pm2 kill                        # wipes out any processes
