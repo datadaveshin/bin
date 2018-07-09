@@ -1,9 +1,0 @@
-#!/bin/bash
-# 
-# Open notes and website for codecademy
-#
-##############
-
-atom /Users/dave/Learn/codeacademy/2018-ruby
-open -na "Google Chrome" --args --new-window "https://www.codecademy.com/learn"
-
