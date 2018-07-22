@@ -1,14 +1,17 @@
 #!/bin/bash
-# Script used to make a note using the date as part of the filename 
-# The beginning of the note will have a timestamp inside
 # 
+# © David Shin, 2018
+#
+# Description: 
+# Script used to make a note using the date as part of the filename
+# The beginning of the note will have a timestamp inside
+#
 # Default filename:
 # note_YYYY_mm_dd
 #
-# Flags: 
+# Flags:
 # -n adds a name to the file string: note_name_YYYY_mm_dd
-# -e add an extension, ie. `-e md`:  note_YYYY_mm_dd.md 
-#
+# -e add an extension, ie. `-e md`:  note_YYYY_mm_dd.md
 #
 # TODO
 # 1. Set another flag for an open -a - default is vim
@@ -30,16 +33,16 @@ done
 #echo name extension $name $extension
 
 # Make basic file string, with name substring if provided
-if [ $name = 'false' ]; then 
+if [ $name = 'false' ]; then
   filename=note-$(date +%Y_%m_%d)
-else 
+else
   filename=note-$name-$(date +%Y_%m_%d)
 fi
 
 #echo filename $filename
 
 # Add extension if given
-if [ $extension != 'false' ]; then 
+if [ $extension != 'false' ]; then
   filename=$filename.$extension
 fi
 
@@ -55,4 +58,3 @@ fi
 # Could set a case switch on extension to open using different apps
 #open $filename
 vim $filename
-
