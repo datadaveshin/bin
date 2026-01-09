@@ -1,0 +1,177 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+SCRIPT_DIR="$HOME/bin/share"
+AUTHOR=$(id -F)
+EDITOR_CMD="${EDITOR:-vim}"
+
+usage() {
+    cat <<EOF
+Usage:
+  newscript [options] <name>
+
+Options:
+  --full           Long header (default)
+  --tiny           Short header
+  --bash           Bash script (default)
+  --python         Python script
+  --edit           Open script in editor after creation
+  -h, --help       Show this help
+
+Examples:
+  newscript backup_logs
+  newscript --tiny cleanup_tmp
+  newscript --python --edit parse_data
+EOF
+}
+
+template="full"
+language="bash"
+edit_after=false
+name=""
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --full)    template="full" ;;
+        --tiny)    template="tiny" ;;
+        --bash)    language="bash" ;;
+        --python)  language="python" ;;
+        --edit)    edit_after=true ;;
+        -h|--help) usage; exit 0 ;;
+        -*)
+            echo "Unknown option: $1"
+            usage
+            exit 2
+            ;;
+        *)
+            name="$1"
+            ;;
+    esac
+    shift
+done
+
+[[ -z "$name" ]] && { usage; exit 2; }
+
+path="$SCRIPT_DIR/$name"
+
+if [[ -e "$path" ]]; then
+    echo "Error: $path already exists"
+    exit 1
+fi
+
+created="$(date +%Y-%m-%d)"
+
+if [[ "$language" == "bash" ]]; then
+    if [[ "$template" == "full" ]]; then
+        cat > "$path" <<EOF
+#!/usr/bin/env bash
+#
+# File:        $name
+# Created:     $created
+# Author:      $AUTHOR
+#
+# Description:
+#   Describe what this script does.
+#
+# Usage:
+#   $name [options] <args>
+#
+# Options:
+#   -h, --help        Show help and exit
+#
+# Examples:
+#   $name --help
+#
+# Requirements:
+#   - bash >= 4
+#
+# Environment:
+#   (none)
+#
+# Exit Codes:
+#   0  Success
+#   1  General error
+#   2  Invalid arguments
+#
+# Notes:
+#   Caveats / assumptions / gotchas.
+#
+
+set -euo pipefail
+IFS=\$'\\n\\t'
+
+usage() {
+    sed -n '2,/^set -euo pipefail/p' "\$0"
+}
+
+if [[ "\${1:-}" == "-h" || "\${1:-}" == "--help" ]]; then
+    usage
+    exit 0
+fi
+
+# Script logic starts here
+EOF
+    else
+        cat > "$path" <<EOF
+#!/usr/bin/env bash
+#
+# Description:
+#
+# Usage:
+#
+# Examples:
+#
+# Notes:
+#
+
+set -euo pipefail
+IFS=\$'\\n\\t'
+EOF
+    fi
+else
+    if [[ "$template" == "full" ]]; then
+        cat > "$path" <<EOF
+#!/usr/bin/env python3
+"""
+File:        $name
+Created:     $created
+Author:      $AUTHOR
+
+Description:
+    Describe what this script does.
+
+Usage:
+    $name [options] <args>
+
+Examples:
+    $name --help
+
+Requirements:
+    Python 3.9+
+
+Notes:
+    Caveats / assumptions / gotchas.
+"""
+EOF
+    else
+        cat > "$path" <<EOF
+#!/usr/bin/env python3
+"""
+Description:
+
+Usage:
+
+Examples:
+"""
+EOF
+    fi
+fi
+
+chmod +x "$path"
+echo "Created $path"
+
+if $edit_after; then
+    "$EDITOR_CMD" "$path"
+fi
