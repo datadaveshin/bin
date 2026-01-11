@@ -3,7 +3,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-SCRIPT_DIR="$HOME/bin/share"
+# SCRIPT_DIR="$HOME/bin/share"
 AUTHOR=$(id -F)
 EDITOR_CMD="${EDITOR:-vim}"
 
@@ -54,7 +54,7 @@ done
 
 [[ -z "$name" ]] && { usage; exit 2; }
 
-path="$SCRIPT_DIR/$name"
+path="./$name"
 
 if [[ -e "$path" ]]; then
     echo "Error: $path already exists"
