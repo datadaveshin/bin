@@ -2,15 +2,13 @@
 
 set -euo pipefail
 IFS=$'\n\t'
-
-# SCRIPT_DIR="$HOME/bin/share"
 AUTHOR=$(id -F)
 EDITOR_CMD="${EDITOR:-vim}"
 
 usage() {
     cat <<EOF
 Usage:
-  newscript [options] <name>
+  mkscript [options] <name>
 
 Options:
   --full           Long header (default)
